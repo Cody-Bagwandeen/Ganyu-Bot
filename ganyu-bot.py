@@ -5,9 +5,20 @@ from random import choice
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
 client = commands.Bot(command_prefix = '.' , intents = intents)
 
+#Hello command
 @client.command()
 async def hello(ctx):
     await ctx.send('Hello!') # responds hello to user
+
+#Ping command, replies pong and bot latency in ms
+@client.command()
+async def ping(ctx):
+    await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
+
+@client.event
+async def on_ready():
+    print('Cocogoat has arrived.')
+
 
 #load command
 @client.command()

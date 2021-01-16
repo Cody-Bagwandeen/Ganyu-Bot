@@ -52,6 +52,8 @@ async def clear(ctx,amount = 5): #default amount of lines to clear set to 5
         return
     await ctx.channel.purge(limit = (amount + 1)) # clears the amount of lines specified and removes the line with the command
 
-
+@client.command()
+async def kick(ctx, member : discord.Member, *, reason = None): # member is the user that is being kicked, reads in the member as a Member object
+    await member.kick(reason=reason)
 
 client.run('Nzk5Njk2NDE0NTEwMTUzNzg4.YAHVUg.dLo2Kp814dIgQEHC2ccFYY-aa44')

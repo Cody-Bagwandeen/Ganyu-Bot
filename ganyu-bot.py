@@ -39,6 +39,19 @@ async def load(ctx,extension):
 async def unload(ctx,extension):
     client.unload_extension(f'cogs.{extension}')
 
+#reload command
+@client.command()
+async def reload(ctx,extension):
+    client.reload_extension(f'cogs.{extension}')
+
+#error handing for invalid commands
+@client.event
+async def on_command_error(ctx,error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send('Invalid command.')
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('Please use all required arguements.')
+
 #loop to load all extensions when the bot starts up
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):

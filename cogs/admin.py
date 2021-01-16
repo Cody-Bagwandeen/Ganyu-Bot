@@ -8,10 +8,10 @@ class Admin(commands.Cog):
 
     @commands.command()
     #clears messages
-    async def clear(self,ctx,amount = 5):
+    async def clear(self,ctx,amount : int):
         if amount == 0:
             return
-        await ctx.channel.purge(limit = (amount +1))
+        await ctx.channel.purge(limit = (amount + 1))
 
     @commands.command()
     #kicks users from server
@@ -48,6 +48,7 @@ class Admin(commands.Cog):
     #pints message when user leaves server
     async def on_member_remove(self,member):
         print(f'{member} has left the server.')
+
 
 def setup(client):
     client.add_cog(Admin(client))

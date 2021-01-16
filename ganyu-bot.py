@@ -51,6 +51,8 @@ async def on_command_error(ctx,error):
         await ctx.send('Invalid command.')
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send('Please use all required arguements.')
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send('You do not have permission to use that command.')
 
 #loop to load all extensions when the bot starts up
 for filename in os.listdir('./cogs'):

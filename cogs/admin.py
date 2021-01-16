@@ -7,6 +7,7 @@ class Admin(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     #clears messages
     async def clear(self,ctx,amount : int):
         if amount == 0:

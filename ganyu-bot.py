@@ -19,4 +19,9 @@ async def on_member_remove(member):
 async def ping(ctx):
     await ctx.send('Pong!')
 
+@client.command()
+async def hello(ctx):
+    await ctx.send('Hello!')
+    
+
 client.run('Nzk5Njk2NDE0NTEwMTUzNzg4.YAHVUg.dLo2Kp814dIgQEHC2ccFYY-aa44')

@@ -55,10 +55,28 @@ async def clear(ctx,amount = 5): #default amount of lines to clear set to 5
 @client.command()
 async def kick(ctx, member : discord.Member, *, reason = None): # member is the user that is being kicked, reads in the member as a Member object
     await member.kick(reason=reason)
+    await ctx.send(f'Kicked {member.mention}')
 
 @client.command()
 async def ban(ctx, member : discord.Member, *, reason = None): # member is the user that is being banned, reads in the member as a Member object
     await member.ban(reason=reason)
+    await ctx.send(f'Banned {user.mention}')
+
+@client.command()
+async def unban(ctx, *, member): # in this case member is not a Member object
+    banned_users = await ctx.guild.bans() #banned users of the server
+    member_name, member_discriminator = member.split('#')
+
+    for ban_entry in banned_users:
+        user = ban_entry.user
+
+        if(user.name, user.discriminator) == (member_name,member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(f'Unbanned {user.mention')
+            return
+
+
+
 
 
 client.run('Nzk5Njk2NDE0NTEwMTUzNzg4.YAHVUg.dLo2Kp814dIgQEHC2ccFYY-aa44')

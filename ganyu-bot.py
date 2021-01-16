@@ -56,7 +56,7 @@ async def clear(ctx,amount = 5): #default amount of lines to clear set to 5
 async def kick(ctx, member : discord.Member, *, reason = None): # member is the user that is being kicked, reads in the member as a Member object
     await member.kick(reason=reason)
 
-@client.commnad()
+@client.command()
 async def ban(ctx, member : discord.Member, *, reason = None): # member is the user that is being banned, reads in the member as a Member object
     await member.ban(reason=reason)
 

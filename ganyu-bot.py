@@ -42,6 +42,8 @@ async def quote(ctx):
 
 @client.command()
 async def clear(ctx,amount = 5): #default amount of lines to clear set to 5
+    if amount == 0 :
+        return
     await ctx.channel.purge(limit = (amount + 1)) # clears the amount of lines specified and removes the line with the command
 
 

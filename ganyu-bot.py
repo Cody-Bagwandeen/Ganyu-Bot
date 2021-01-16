@@ -5,14 +5,6 @@ from random import choice
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
 client = commands.Bot(command_prefix = '.' , intents = intents)
 
-@client.event
-async def on_member_join(member):
-    print(f'{member} has joined the server.') # prints that the user has joined the server
-
-@client.event
-async def on_member_remove(member):
-    print(f'{member} has left the server.') # prints that the user hsa left the server
-
 @client.command()
 async def hello(ctx):
     await ctx.send('Hello!') # responds hello to user
@@ -38,30 +30,6 @@ async def quote(ctx):
                  'Next on the agenda...',
                  'Glaze over!']
     await ctx.send(f'{choice(responses)}') # choices a random quote and sends that quote as a message
-
-
-@client.command()
-async def kick(ctx, member : discord.Member, *, reason = None): # member is the user that is being kicked, reads in the member as a Member object
-    await member.kick(reason=reason)
-    await ctx.send(f'Kicked {member.mention}')
-
-@client.command()
-async def ban(ctx, member : discord.Member, *, reason = None): # member is the user that is being banned, reads in the member as a Member object
-    await member.ban(reason=reason)
-    await ctx.send(f'Banned {user.mention}')
-
-@client.command()
-async def unban(ctx, *, member): # in this case member is not a Member object
-    banned_users = await ctx.guild.bans() #banned users of the server
-    member_name, member_discriminator = member.split('#')
-
-    for ban_entry in banned_users:
-        user = ban_entry.user
-
-        if(user.name, user.discriminator) == (member_name,member_discriminator):
-            await ctx.guild.unban(user)
-            await ctx.send(f'Unbanned {user.mention}')
-            return
 
 #load command
 @client.command()

@@ -72,7 +72,7 @@ async def unban(ctx, *, member): # in this case member is not a Member object
 
         if(user.name, user.discriminator) == (member_name,member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'Unbanned {user.mention')
+            await ctx.send(f'Unbanned {user.mention}')
             return
 
 

@@ -1,6 +1,7 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import os
+from itertools import cycle
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
 client = commands.Bot(command_prefix = '.' , intents = intents)
 
@@ -17,8 +18,16 @@ async def ping(ctx):
 #on_ready prints a message when the bot is ready, changes status when bot is on
 @client.event
 async def on_ready():
+    change_status.start()
     await client.change_presence(status=discord.Status.online, activity = discord.Game('Working Overtime'))
     print('Cocogoat has arrived.')
+
+#change status as a background task
+status = cycle(['Status1','Status2'])
+
+@tasks.loop(seconds = 10)
+async def change_status():
+    await client.change_presence(activity=discord.Game(next(status)))
 
 #load command
 @client.command()

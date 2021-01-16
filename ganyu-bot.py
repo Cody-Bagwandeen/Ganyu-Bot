@@ -1,12 +1,9 @@
 import discord
 from discord.ext import commands
+import os
 from random import choice
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
 client = commands.Bot(command_prefix = '.' , intents = intents)
-
-@client.event
-async def on_ready():
-    print('Cocogoat has arrived') # prints this messsage when the bot is ready
 
 @client.event
 async def on_member_join(member):
@@ -15,10 +12,6 @@ async def on_member_join(member):
 @client.event
 async def on_member_remove(member):
     print(f'{member} has left the server.') # prints that the user hsa left the server
-
-@client.command()
-async def ping(ctx):
-    await ctx.send(f'Pong! {round(client.latency * 1000)}ms') # replies to user command with pong and displays the bots latency in ms
 
 @client.command()
 async def hello(ctx):
@@ -46,11 +39,6 @@ async def quote(ctx):
                  'Glaze over!']
     await ctx.send(f'{choice(responses)}') # choices a random quote and sends that quote as a message
 
-@client.command()
-async def clear(ctx,amount = 5): #default amount of lines to clear set to 5
-    if amount == 0 :
-        return
-    await ctx.channel.purge(limit = (amount + 1)) # clears the amount of lines specified and removes the line with the command
 
 @client.command()
 async def kick(ctx, member : discord.Member, *, reason = None): # member is the user that is being kicked, reads in the member as a Member object
@@ -75,8 +63,19 @@ async def unban(ctx, *, member): # in this case member is not a Member object
             await ctx.send(f'Unbanned {user.mention}')
             return
 
+#load command
+@client.command()
+async def load(ctx,extension):
+    client.load_extension(f'cogs.{extension}')
 
+#unload command
+@client.command()
+async def unload(ctx,extension):
+    client.unload_extension(f'cogs.{extension}')
 
-
+#loop to load all extensions when the bot starts up
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        client.load_extension(f'cogs.{filename[:-3]}')
 
 client.run('Nzk5Njk2NDE0NTEwMTUzNzg4.YAHVUg.dLo2Kp814dIgQEHC2ccFYY-aa44')

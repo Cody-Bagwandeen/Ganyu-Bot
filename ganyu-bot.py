@@ -48,18 +48,6 @@ async def unload(ctx,extension):
 async def reload(ctx,extension):
     client.reload_extension(f'cogs.{extension}')
 
-#error handing for invalid commands
-@client.event
-async def on_command_error(ctx,error):
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.send('Invalid command.')
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Please use all required arguements.')
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send('You do not have permission to use that command.')
-    if isinstance(error, commands.ExtensionNotFound):
-        await ctx.send('Invalid extension.')
-
 #loop to load all extensions when the bot starts up
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):

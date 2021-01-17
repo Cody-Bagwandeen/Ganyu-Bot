@@ -64,4 +64,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}') # removes the .py when trying to load the file since its checked for
 
-client.run('Nzk5Njk2NDE0NTEwMTUzNzg4.YAHVUg.dLo2Kp814dIgQEHC2ccFYY-aa44')
+client.run('Nzk5Njk2NDE0NTEwMTUzNzg4.YAHVUg.le1Wzb6q2k_FLRRookVtKCuQMVU')

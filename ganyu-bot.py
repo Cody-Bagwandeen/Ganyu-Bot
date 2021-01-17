@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands, tasks
 import os
+import youtube_dl
 from itertools import cycle
-intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
+intents = discord.Intents.all()
 client = commands.Bot(command_prefix = '.' , intents = intents)
 
 #Hello command
@@ -23,7 +24,7 @@ async def on_ready():
     print('Cocogoat has arrived.')
 
 #change status as a background task
-status = cycle(['Status1','Status2'])
+status = cycle(['Farming Cryo Regisvine','Farming Mora','Farming Diligence Books'])
 
 @tasks.loop(seconds = 10)
 async def change_status():

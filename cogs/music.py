@@ -21,7 +21,10 @@ class music(commands.Cog):
     @commands.command()
     async def leave(self,ctx):
         try:
-            await ctx.guild.voice_client.disconnect()
+            if ctx.guild.voice_client.channel == ctx.message.author.voice.channel:
+                await ctx.guild.voice_client.disconnect()
+            else:
+                await ctx.send('You are not in the same voice channel.')
         except AttributeError:
             await ctx.send('Not currently connected to a voice channel.')
 

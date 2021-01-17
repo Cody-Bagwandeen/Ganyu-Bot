@@ -31,16 +31,19 @@ async def change_status():
 
 #load command
 @client.command()
+@commands.has_permissions(administrator=True)
 async def load(ctx,extension):
     client.load_extension(f'cogs.{extension}')
 
 #unload command
 @client.command()
+@commands.has_permissions(administrator=True)
 async def unload(ctx,extension):
     client.unload_extension(f'cogs.{extension}')
 
 #reload command
 @client.command()
+@commands.has_permissions(administrator=True)
 async def reload(ctx,extension):
     client.reload_extension(f'cogs.{extension}')
 
@@ -53,6 +56,8 @@ async def on_command_error(ctx,error):
         await ctx.send('Please use all required arguements.')
     if isinstance(error, commands.MissingPermissions):
         await ctx.send('You do not have permission to use that command.')
+    if isinstance(error, commands.ExtensionNotFound):
+        await ctx.send('Invalid extension.')
 
 #loop to load all extensions when the bot starts up
 for filename in os.listdir('./cogs'):

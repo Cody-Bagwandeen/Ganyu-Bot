@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from random import choice
 
-class Quotes(commands.Cog):
+class quotes(commands.Cog):
 
     def __init__(self,client):
         self.client = client
@@ -30,4 +30,4 @@ class Quotes(commands.Cog):
         await ctx.send(f'{choice(responses)}') # choices a random quote and sends that quote as a message
 
 def setup(client):
-    client.add_cog(Quotes(client))
+    client.add_cog(quotes(client))

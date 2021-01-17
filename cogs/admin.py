@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Admin(commands.Cog):
+class admin(commands.Cog):
 
     def __init__(self,client):
         self.client = client
@@ -15,18 +15,21 @@ class Admin(commands.Cog):
         await ctx.channel.purge(limit = (amount + 1))
 
     @commands.command()
+    @commands.has_permissions(kick_members=True)
     #kicks users from server
     async def kick(self,ctx, member : discord.Member,*, reason = None):
         await member.kick(reason=reason)
         await ctx.send(f'Kicked {member.mention}')
 
     @commands.command()
+    @commands.has_permissions(ban_members=True)
     #bans users from server
     async def ban(self,ctx, member : discord.Member,*, reason = None):
         await member.ban(reason=reason)
         await ctx.send(f'Banned {member.mention}')
 
     @commands.command()
+    @commands.has_permissions(ban_members=True)
     #unbans banned users from server
     async def unban(self,ctx,*,member):
         banned_users = await ctx.guild.bans() #banned users of the server
@@ -52,4 +55,4 @@ class Admin(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Admin(client))
+    client.add_cog(admin(client))
